@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="<%= language %>" dir="<%= language === 'ar' ? 'rtl' : 'ltr' %>">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="موقع متخصص عن زيوت المحولات والطائرات - معلومات هندسية دقيقة وتحليلات علمية">
+    <meta name="keywords" content="زيوت محولات، زيوت طائرات، هندسة، تحليلات">
+    <title><%= title %> - أبو بكر محمود</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>أبو بكر محمود</h1>
+                <p style="font-size: 0.85rem; opacity: 0.9;">زيوت المحولات والطائرات</p>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link <%= !title || title.includes('أبو بكر') ? 'active' : '' %>">الرئيسية</a></li>
+                <li><a href="/articles/category/power-transformers" class="nav-link">محولات</a></li>
+                <li><a href="/articles/category/commercial-aircraft" class="nav-link">طائرات</a></li>
+                <li><a href="/about" class="nav-link">عن الموقع</a></li>
+                <li><a href="/contact" class="nav-link">اتصل بنا</a></li>
+                <% if (user) { %>
+                    <li><a href="/auth/profile" class="nav-link"><%= user.full_name || user.username %></a></li>
+                    <% if (user.role === 'admin') { %>
+                        <li><a href="/admin" class="nav-link">لوحة التحكم</a></li>
+                    <% } %>
+                    <li><a href="/auth/logout" class="nav-link">خروج</a></li>
+                <% } else { %>
+                    <li><a href="/auth/login" class="nav-link">دخول</a></li>
+                    <li><a href="/auth/register" class="nav-link">تسجيل</a></li>
+                <% } %>
+            </ul>
+            <button class="lang-toggle" onclick="toggleLanguage()"><%= language === 'ar' ? 'EN' : 'AR' %></button>
+        </div>
+    </nav>
+
+    <!-- Search Bar -->
+    <div style="background-color: #f5f7fa; padding: 1rem 0; border-bottom: 1px solid #ddd;">
+        <div class="container">
+            <form onsubmit="performSearch(event)" style="display: flex; gap: 0.5rem;">
+                <input type="text" id="searchInput" placeholder="ابحث عن مقالات..." style="flex: 1; padding: 0.8rem; border: 2px solid #ddd; border-radius: 4px;">
+                <button type="submit" class="btn btn-primary">بحث</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <%- body %>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 أبو بكر محمود - جميع الحقوق محفوظة</p>
+            <p>موقع متخصص في معلومات زيوت المحولات والطائرات</p>
+            <p style="margin-top: 1rem; font-size: 0.9rem;">
+                <a href="/" style="color: var(--secondary-color); text-decoration: none;">الرئيسية</a> | 
+                <a href="/about" style="color: var(--secondary-color); text-decoration: none;">عن الموقع</a> | 
+                <a href="/contact" style="color: var(--secondary-color); text-decoration: none;">اتصل بنا</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>

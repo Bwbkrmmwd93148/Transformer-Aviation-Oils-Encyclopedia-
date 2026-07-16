@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="<%= language %>" dir="<%= language === 'ar' ? 'rtl' : 'ltr' %>">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>أبو بكر محمود</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link">الرئيسية</a></li>
+                <li><a href="/about" class="nav-link">عن الموقع</a></li>
+                <li><a href="/contact" class="nav-link active">اتصل بنا</a></li>
+            </ul>
+            <button class="lang-toggle" onclick="toggleLanguage()"><%= language === 'ar' ? 'EN' : 'AR' %></button>
+        </div>
+    </nav>
+
+    <!-- Contact Header -->
+    <section style="background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%); color: white; padding: 3rem 0; text-align: center;">
+        <div class="container">
+            <h1 style="font-size: 2.5rem;">اتصل بنا</h1>
+            <p>نحن هنا للإجابة على جميع استفساراتك</p>
+        </div>
+    </section>
+
+    <!-- Contact Content -->
+    <section style="padding: 3rem 0;">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; max-width: 1000px; margin: 0 auto;">
+                <!-- Contact Form -->
+                <div>
+                    <h2 style="color: var(--primary-color); margin-bottom: 1.5rem;">أرسل لنا رسالة</h2>
+                    <form onsubmit="submitContactForm(event)">
+                        <div class="form-group">
+                            <label>الاسم</label>
+                            <input type="text" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>البريد الإلكتروني</label>
+                            <input type="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label>الموضوع</label>
+                            <input type="text" name="subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label>الرسالة</label>
+                            <textarea name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">إرسال الرسالة</button>
+                    </form>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h2 style="color: var(--primary-color); margin-bottom: 1.5rem;">معلومات التواصل</h2>
+                    
+                    <div class="card" style="margin-bottom: 1rem;">
+                        <h4>📧 البريد الإلكتروني</h4>
+                        <p><a href="mailto:info@example.com" style="color: var(--secondary-color); text-decoration: none;">info@example.com</a></p>
+                    </div>
+
+                    <div class="card" style="margin-bottom: 1rem;">
+                        <h4>📱 الهاتف</h4>
+                        <p><a href="tel:+966501234567" style="color: var(--secondary-color); text-decoration: none;">+966 50 123 4567</a></p>
+                    </div>
+
+                    <div class="card" style="margin-bottom: 1rem;">
+                        <h4>📍 العنوان</h4>
+                        <p>المملكة العربية السعودية<br>الرياض</p>
+                    </div>
+
+                    <div class="card">
+                        <h4>🕐 ساعات العمل</h4>
+                        <p>السبت - الخميس: 9:00 صباحاً - 6:00 مساءً<br>الجمعة: مغلق</p>
+                    </div>
+
+                    <h3 style="color: var(--primary-color); margin-top: 2rem; margin-bottom: 1rem;">تابعنا</h3>
+                    <div style="display: flex; gap: 1rem;">
+                        <button class="btn btn-primary" onclick="alert('Facebook')">f</button>
+                        <button class="btn btn-primary" onclick="alert('Twitter')">𝕏</button>
+                        <button class="btn btn-primary" onclick="alert('LinkedIn')">in</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 أبو بكر محمود - جميع الحقوق محفوظة</p>
+        </div>
+    </footer>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>

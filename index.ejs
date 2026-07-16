@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="<%= language %>" dir="<%= language === 'ar' ? 'rtl' : 'ltr' %>">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>أبو بكر محمود</h1>
+                <p style="font-size: 0.85rem; opacity: 0.9;">زيوت المحولات والطائرات</p>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link active">الرئيسية</a></li>
+                <li><a href="#transformers" class="nav-link">محولات</a></li>
+                <li><a href="#aircraft" class="nav-link">طائرات</a></li>
+                <li><a href="/about" class="nav-link">عن الموقع</a></li>
+                <li><a href="/contact" class="nav-link">اتصل بنا</a></li>
+                <% if (user) { %>
+                    <li><a href="/auth/profile" class="nav-link"><%= user.full_name || user.username %></a></li>
+                    <% if (user.role === 'admin') { %>
+                        <li><a href="/admin" class="nav-link">لوحة التحكم</a></li>
+                    <% } %>
+                <% } else { %>
+                    <li><a href="/auth/login" class="nav-link">دخول</a></li>
+                <% } %>
+            </ul>
+            <button class="lang-toggle" onclick="toggleLanguage()"><%= language === 'ar' ? 'EN' : 'AR' %></button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2>معلومات شاملة عن زيوت المحولات والطائرات</h2>
+            <p>وصف هندسي دقيق وتحليلات علمية متقدمة</p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <button class="btn btn-primary" onclick="document.getElementById('transformers').scrollIntoView({behavior:'smooth'})">محولات كهربائية</button>
+                <button class="btn btn-secondary" onclick="document.getElementById('aircraft').scrollIntoView({behavior:'smooth'})">طائرات</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Bar -->
+    <div style="background-color: #f5f7fa; padding: 1rem 0; border-bottom: 1px solid #ddd;">
+        <div class="container">
+            <form onsubmit="performSearch(event)" style="display: flex; gap: 0.5rem;">
+                <input type="text" id="searchInput" placeholder="ابحث عن مقالات..." style="flex: 1; padding: 0.8rem; border: 2px solid #ddd; border-radius: 4px;">
+                <button type="submit" class="btn btn-primary">بحث</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Featured Articles -->
+    <section style="padding: 3rem 0;">
+        <div class="container">
+            <h2 style="text-align: center; color: var(--primary-color); margin-bottom: 2rem; font-size: 2rem;">مقالات مميزة</h2>
+            <div class="grid">
+                <% featured.forEach(article => { %>
+                    <div class="article-card">
+                        <% if (article.featured_image) { %>
+                            <img src="<%= article.featured_image %>" alt="<%= article.title %>" class="article-image">
+                        <% } %>
+                        <div class="article-content">
+                            <h3><%= article.title %></h3>
+                            <p class="article-meta"><%= new Date(article.created_at).toLocaleDateString('ar-SA') %></p>
+                            <p><%= article.description || article.content.substring(0, 150) %>...</p>
+                            <a href="/articles/<%= article.slug %>" class="btn btn-primary">اقرأ المزيد</a>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+        </div>
+    </section>
+
+    <!-- Transformers Section -->
+    <section id="transformers" style="padding: 3rem 0; background-color: #f5f7fa;">
+        <div class="container">
+            <h2 style="text-align: center; color: var(--primary-color); margin-bottom: 2rem; font-size: 2rem;">محولات كهربائية</h2>
+            <div class="grid">
+                <% transformerCategories.forEach(category => { %>
+                    <div class="card">
+                        <h3><%= category.slug.replace(/-/g, ' ') %></h3>
+                        <p><%= category.article_count %> مقالة</p>
+                        <a href="/articles/category/<%= category.slug %>" class="btn btn-primary">عرض المقالات</a>
+                    </div>
+                <% }); %>
+            </div>
+        </div>
+    </section>
+
+    <!-- Aircraft Section -->
+    <section id="aircraft" style="padding: 3rem 0;">
+        <div class="container">
+            <h2 style="text-align: center; color: var(--primary-color); margin-bottom: 2rem; font-size: 2rem;">طائرات</h2>
+            <div class="grid">
+                <% aircraftCategories.forEach(category => { %>
+                    <div class="card">
+                        <h3><%= category.slug.replace(/-/g, ' ') %></h3>
+                        <p><%= category.article_count %> مقالة</p>
+                        <a href="/articles/category/<%= category.slug %>" class="btn btn-primary">عرض المقالات</a>
+                    </div>
+                <% }); %>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 أبو بكر محمود - جميع الحقوق محفوظة</p>
+            <p>موقع متخصص في معلومات زيوت المحولات والطائرات</p>
+        </div>
+    </footer>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>

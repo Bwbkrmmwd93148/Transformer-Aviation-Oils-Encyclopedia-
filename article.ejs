@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="<%= language %>" dir="<%= language === 'ar' ? 'rtl' : 'ltr' %>">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= article.title %></title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>أبو بكر محمود</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link">الرئيسية</a></li>
+                <li><a href="/about" class="nav-link">عن الموقع</a></li>
+                <li><a href="/contact" class="nav-link">اتصل بنا</a></li>
+            </ul>
+            <button class="lang-toggle" onclick="toggleLanguage()"><%= language === 'ar' ? 'EN' : 'AR' %></button>
+        </div>
+    </nav>
+
+    <!-- Article Header -->
+    <section style="background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%); color: white; padding: 3rem 0;">
+        <div class="container">
+            <h1 style="font-size: 2.5rem; margin-bottom: 1rem;"><%= article.title %></h1>
+            <div style="display: flex; gap: 2rem; flex-wrap: wrap; font-size: 0.95rem;">
+                <span>📅 <%= new Date(article.created_at).toLocaleDateString('ar-SA') %></span>
+                <span>👁️ <%= article.views_count %> مشاهدة</span>
+                <span>✍️ <%= article.author_name || 'مجهول' %></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Article Content -->
+    <section style="padding: 3rem 0;">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: 1fr 300px; gap: 2rem;">
+                <!-- Main Content -->
+                <div>
+                    <% if (article.featured_image) { %>
+                        <img src="<%= article.featured_image %>" alt="<%= article.title %>" style="width: 100%; border-radius: 8px; margin-bottom: 2rem;">
+                    <% } %>
+                    
+                    <div style="line-height: 1.8; color: #333;">
+                        <%- article.content %>
+                    </div>
+
+                    <!-- Rating -->
+                    <div style="margin-top: 2rem; padding: 1.5rem; background: var(--light-bg); border-radius: 8px;">
+                        <h3>التقييم</h3>
+                        <% if (ratingInfo && ratingInfo.total_ratings > 0) { %>
+                            <p>⭐ <%= (ratingInfo.average_rating || 0).toFixed(1) %> / 5 (<%= ratingInfo.total_ratings %> تقييم)</p>
+                        <% } else { %>
+                            <p>لا توجد تقييمات حتى الآن</p>
+                        <% } %>
+                    </div>
+
+                    <!-- Comments Section -->
+                    <div style="margin-top: 3rem;">
+                        <h3>التعليقات (<%= comments.length %>)</h3>
+                        
+                        <% if (user) { %>
+                            <div style="background: var(--light-bg); padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem;">
+                                <h4>أضف تعليقاً</h4>
+                                <form onsubmit="submitComment(<%= article.id %>)">
+                                    <div class="form-group">
+                                        <textarea id="commentContent" placeholder="اكتب تعليقك هنا..." rows="4" required></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>التقييم:</label>
+                                        <select id="commentRating">
+                                            <option value="">بدون تقييم</option>
+                                            <option value="1">⭐ سيء</option>
+                                            <option value="2">⭐⭐ متوسط</option>
+                                            <option value="3">⭐⭐⭐ جيد</option>
+                                            <option value="4">⭐⭐⭐⭐ ممتاز</option>
+                                            <option value="5">⭐⭐⭐⭐⭐ رائع جداً</option>
+                                        </select>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">إرسال التعليق</button>
+                                </form>
+                            </div>
+                        <% } else { %>
+                            <p style="background: var(--light-bg); padding: 1rem; border-radius: 8px; margin-bottom: 2rem;">
+                                <a href="/auth/login">سجل دخولك</a> لإضافة تعليق
+                            </p>
+                        <% } %>
+
+                        <!-- Comments List -->
+                        <div>
+                            <% comments.forEach(comment => { %>
+                                <div style="padding: 1rem; border-bottom: 1px solid #ddd; margin-bottom: 1rem;">
+                                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                        <strong><%= comment.full_name %></strong>
+                                        <small style="color: #999;"><%= new Date(comment.created_at).toLocaleDateString('ar-SA') %></small>
+                                    </div>
+                                    <% if (comment.rating) { %>
+                                        <div style="margin-bottom: 0.5rem;">⭐ <%= comment.rating %>/5</div>
+                                    <% } %>
+                                    <p><%= comment.content %></p>
+                                </div>
+                            <% }); %>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <aside>
+                    <!-- Related Articles -->
+                    <div style="background: var(--light-bg); padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem;">
+                        <h4 style="margin-bottom: 1rem;">مقالات ذات صلة</h4>
+                        <% related.forEach(rel => { %>
+                            <div style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #ddd;">
+                                <a href="/articles/<%= rel.slug %>" style="color: var(--primary-color); text-decoration: none; font-weight: 500;">
+                                    <%= rel.title %>
+                                </a>
+                                <p style="font-size: 0.85rem; color: #999; margin-top: 0.3rem;">
+                                    <%= new Date(rel.created_at).toLocaleDateString('ar-SA') %>
+                                </p>
+                            </div>
+                        <% }); %>
+                    </div>
+
+                    <!-- Share -->
+                    <div style="background: var(--light-bg); padding: 1.5rem; border-radius: 8px;">
+                        <h4 style="margin-bottom: 1rem;">شارك المقالة</h4>
+                        <button class="btn btn-primary" style="width: 100%; margin-bottom: 0.5rem;" onclick="alert('مشاركة على وسائل التواصل')">📱 شارك</button>
+                        <button class="btn btn-secondary" style="width: 100%;" onclick="navigator.clipboard.writeText(window.location.href); alert('تم نسخ الرابط')">🔗 نسخ الرابط</button>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 أبو بكر محمود - جميع الحقوق محفوظة</p>
+        </div>
+    </footer>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="<%= language %>" dir="<%= language === 'ar' ? 'rtl' : 'ltr' %>">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>أبو بكر محمود</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link">الرئيسية</a></li>
+                <li><a href="/about" class="nav-link active">عن الموقع</a></li>
+                <li><a href="/contact" class="nav-link">اتصل بنا</a></li>
+            </ul>
+            <button class="lang-toggle" onclick="toggleLanguage()"><%= language === 'ar' ? 'EN' : 'AR' %></button>
+        </div>
+    </nav>
+
+    <!-- About Header -->
+    <section style="background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%); color: white; padding: 3rem 0; text-align: center;">
+        <div class="container">
+            <h1 style="font-size: 2.5rem;">عن الموقع</h1>
+        </div>
+    </section>
+
+    <!-- About Content -->
+    <section style="padding: 3rem 0;">
+        <div class="container">
+            <div style="max-width: 800px; margin: 0 auto;">
+                <h2 style="color: var(--primary-color); margin-bottom: 1rem;">مرحباً بك في موقع أبو بكر محمود</h2>
+                
+                <p style="margin-bottom: 1.5rem; line-height: 1.8;">
+                    موقع متخصص يقدم معلومات شاملة وتفصيلية عن زيوت المحولات الكهربائية وزيوت الطائرات. 
+                    نهدف إلى توفير وصف هندسي دقيق وتحليلات علمية متقدمة لجميع المهتمين والمتخصصين.
+                </p>
+
+                <h3 style="color: var(--primary-color); margin-top: 2rem; margin-bottom: 1rem;">أهداف الموقع</h3>
+                <ul style="margin-bottom: 1.5rem; line-height: 1.8;">
+                    <li>✅ توفير معلومات دقيقة وموثوقة عن زيوت المحولات والطائرات</li>
+                    <li>✅ تقديم تحليلات علمية متقدمة وشاملة</li>
+                    <li>✅ شرح الخصائص الفيزيائية والكيميائية للزيوت</li>
+                    <li>✅ توضيح المعايير الدولية والمواصفات</li>
+                    <li>✅ تقديم معلومات عملية وتطبيقية</li>
+                </ul>
+
+                <h3 style="color: var(--primary-color); margin-top: 2rem; margin-bottom: 1rem;">محتوى الموقع</h3>
+                <p style="margin-bottom: 1.5rem; line-height: 1.8;">
+                    يحتوي الموقع على أكثر من 20 مقالة شاملة تغطي:
+                </p>
+                <ul style="margin-bottom: 1.5rem; line-height: 1.8;">
+                    <li>🔹 10 أنواع مختلفة من المحولات الكهربائية</li>
+                    <li>🔹 10 أنواع مختلفة من الطائرات</li>
+                    <li>🔹 معلومات هندسية دقيقة لكل نوع</li>
+                    <li>🔹 تحليلات علمية متقدمة</li>
+                    <li>🔹 المعايير والمواصفات الدولية</li>
+                </ul>
+
+                <h3 style="color: var(--primary-color); margin-top: 2rem; margin-bottom: 1rem;">ميزات الموقع</h3>
+                <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                    <div class="card">
+                        <h4>🌐 دعم لغات متعددة</h4>
+                        <p>الموقع يدعم 10 لغات مختلفة</p>
+                    </div>
+                    <div class="card">
+                        <h4>🔍 محرك بحث متقدم</h4>
+                        <p>ابحث بسهولة عن المقالات والمعلومات</p>
+                    </div>
+                    <div class="card">
+                        <h4>💬 نظام تعليقات</h4>
+                        <p>شارك آرائك وتعليقاتك</p>
+                    </div>
+                    <div class="card">
+                        <h4>⭐ نظام التقييمات</h4>
+                        <p>قيّم المقالات والمحتوى</p>
+                    </div>
+                </div>
+
+                <h3 style="color: var(--primary-color); margin-top: 2rem; margin-bottom: 1rem;">الدقة والموثوقية</h3>
+                <p style="margin-bottom: 1.5rem; line-height: 1.8;">
+                    جميع المعلومات المقدمة في هذا الموقع تم إعدادها بعناية فائقة وتستند إلى:
+                </p>
+                <ul style="margin-bottom: 1.5rem; line-height: 1.8;">
+                    <li>📚 المراجع العلمية والهندسية الموثوقة</li>
+                    <li>📚 المعايير الدولية المعترف بها</li>
+                    <li>📚 الأبحاث والدراسات الحديثة</li>
+                    <li>📚 الخبرات العملية والتطبيقية</li>
+                </ul>
+
+                <h3 style="color: var(--primary-color); margin-top: 2rem; margin-bottom: 1rem;">اتصل بنا</h3>
+                <p style="margin-bottom: 1.5rem; line-height: 1.8;">
+                    إذا كان لديك أي استفسارات أو اقتراحات، يرجى <a href="/contact" style="color: var(--secondary-color); text-decoration: none;">التواصل معنا</a>.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 أبو بكر محمود - جميع الحقوق محفوظة</p>
+        </div>
+    </footer>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>

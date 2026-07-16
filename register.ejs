@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="<%= language %>" dir="<%= language === 'ar' ? 'rtl' : 'ltr' %>">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>أبو بكر محمود</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link">الرئيسية</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Register Section -->
+    <section style="padding: 3rem 0; background: var(--light-bg); min-height: 70vh; display: flex; align-items: center;">
+        <div class="container">
+            <div style="max-width: 400px; margin: 0 auto; background: white; padding: 2rem; border-radius: 8px; box-shadow: var(--shadow-lg);">
+                <h2 style="text-align: center; color: var(--primary-color); margin-bottom: 2rem;">إنشاء حساب جديد</h2>
+                
+                <form onsubmit="submitRegisterForm(event)">
+                    <div class="form-group">
+                        <label>اسم المستخدم</label>
+                        <input type="text" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label>البريد الإلكتروني</label>
+                        <input type="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>الاسم الكامل</label>
+                        <input type="text" name="full_name">
+                    </div>
+                    <div class="form-group">
+                        <label>كلمة المرور</label>
+                        <input type="password" name="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">تسجيل</button>
+                </form>
+
+                <p style="text-align: center; margin-top: 1.5rem; color: #666;">
+                    لديك حساب بالفعل؟ <a href="/auth/login" style="color: var(--secondary-color); text-decoration: none; font-weight: 600;">دخول</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 أبو بكر محمود - جميع الحقوق محفوظة</p>
+        </div>
+    </footer>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>
